@@ -1,0 +1,1 @@
+/Users/jeanassis/Documents/sites/realestate/app/views/realestates/show.blade.php
