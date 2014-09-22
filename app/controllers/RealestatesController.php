@@ -2,6 +2,8 @@
 
 class RealestatesController extends \BaseController {
 
+
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /realestates
@@ -46,6 +48,7 @@ class RealestatesController extends \BaseController {
 			$realestate = new RealEstate;
 
 			$realestate->id = Input::get('id');
+			$realestate->user_id = Auth::user()->id;
 			$realestate->streetNumber = Input::get('streetNumber');
 			$realestate->unitNumber = Input::get('unitNumber');
 			$realestate->streetName = Input::get('streetName');
@@ -85,7 +88,7 @@ class RealestatesController extends \BaseController {
 			$realestatereview->save();
 
 
-			return Redirect::route('realestates.index'); 
+			return Redirect::action('AdminsController@index', Auth::user()->username); 
 		}
 
 		return Redirect::to('realestates/create')->withErrors($v);
@@ -102,8 +105,14 @@ class RealestatesController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{
-		//
+	{	
+		$re = Realestate::find($id);
+		$user = User::find($re->user_id);
+		
+		return View::make('realestates.show')
+			->with('realestate', $re)
+			->with('user', $user);
+		
 	}
 
 	/**
@@ -139,7 +148,8 @@ class RealestatesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		Realestate::find($id)->delete();
+		return Redirect::route('realestate.index');
 	}
 
 }

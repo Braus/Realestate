@@ -2,12 +2,20 @@ html,body {
   height:100%;
 }
 
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
 h1 {
-  
-  font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: 700;
+
   font-size:50px;
-  color:#FFF;
+
 }
 
 .lead {
@@ -33,4 +41,8 @@ h1 {
 .v-center {
   margin-top:7%;
 }
-  
+
+#map-canvas{
+    height:250px;
+    width:250px;
+  }

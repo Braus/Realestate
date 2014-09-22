@@ -15,9 +15,12 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function search()
 	{
-		return View::make('hello');
+		$input = Input::get('search');
+		$search = Realestate::where('streetName', 'LIKE' , '%'.$input.'%')->get();
+		return View::make('layout.search')
+			->with('search', $search);
 	}
 
 }

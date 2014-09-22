@@ -1,10 +1,10 @@
 @extends('layout.master')
 
-
 @section('content')
+		<h1>Search Results</h1>
 	
-		@if($realestates->count())
-		@foreach($realestates as $re)
+		@if($search->count())
+		@foreach($search as $re)
 			<div class="panel panel-info">
 	    			<div class="panel-heading">
 		    			<div class="panel-title">
@@ -39,8 +39,7 @@
 		@endforeach
 		@else
 
-		<h4> There is no Real Estate Listed </h4>
+		<h4> Sorry, could not find a Real Estate for you  </h4>
 
 		@endif
-	
 @stop

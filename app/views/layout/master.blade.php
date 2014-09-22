@@ -13,7 +13,8 @@
 
     <!-- Bootstrap Core CSS -->
     {{ HTML::style('css/bootstrap.min.css') }}
-    {{ HTML::style('css/landing-page.css') }}
+  
+     {{ HTML::style('css/styles.css') }}
     
     <!-- Custom CSS -->
    
@@ -44,23 +45,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                {{ HTML::link('realestates', 'My Real Estate Review', array('class' => 'navbar-brand')) }}
+               <div class="col-md-5 pull-right"> 
+                {{ Form::open(array('url' => 'search')) }}
+                    <div class="input-group"> 
+                            {{ Form::text('search', '', array('placeholder' => 'Search by Street Name', 'class' => 'form-control')) }}
+                            <span class="input-group-btn">
+                                  {{ Form::submit('Search', array('class' => 'btn btn-default')) }}
+                            </span>
+                    </div>
+                {{ Form::close() }}
+                </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+            
         </div>
         <!-- /.container -->
     </nav>
@@ -70,18 +68,40 @@
     <!-- Page Content -->
 
     <!--Yield Content-->
+    <br><br>
    <div class="container">
 	<div class="row">
-	
-		@yield('content') 
+	       <div class="col-md-3">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav ">
+                                        <li>
+                                            @if (Auth::check())
+                                                  {{ Auth::user()->username }} / {{ HTML::link('logout', 'Logout')}}
+                                                  {{ HTML::link('mine/'.Auth::user()->username, 'Profile') }}
+                                            @else
+                                                 {{ HTML::link('/', 'Login') }}
+                                            @endif            
+                                        </li>
+                                </ul>
+                           </div>     
+                            <div class="clearfix"></div>
 
-	</div>
-</div>		
+                             @yield('sidebar-left')
+                            
+                     </div>
+                                        <!-- /.navbar-collapse -->
+                                               
+                    <div class="col-md-9">
+                        @yield('content') 
+                    </div>
+            </div>
+</div>
+		
 
    
 
     
-
+<div class="clearfix"></div>
     
 
     
@@ -91,23 +111,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#home">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul>
+                    
                     <p class="copyright text-muted small">Copyright &copy; Your Company 2014. All Rights Reserved</p>
                 </div>
             </div>
@@ -120,7 +124,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     {{ HTML::script('js/bootstrap.min.js')}}
-    
+    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    @yield('map')
 
 </body>
 

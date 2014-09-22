@@ -23,4 +23,8 @@ class Realestate extends \Eloquent {
 	{
 		return $this->hasMany('RealestateReview','realestateId');
 	}
+	public function users()
+	{
+		return $this->belongsTo('User', 'id');
+	}
 }
